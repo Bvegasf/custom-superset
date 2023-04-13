@@ -24,7 +24,7 @@ import {
   getTimeFormatterRegistry,
   smartDateFormatter,
   smartDateVerboseFormatter,
-  createD3NumberFormatter
+  createD3NumberFormatter,
 } from '@superset-ui/core';
 
 export default function setupFormatters() {
@@ -64,15 +64,18 @@ export default function setupFormatters() {
     .registerValue('$,0f', getNumberFormatter('$,.4f'))
     .registerValue('$,.f', getNumberFormatter('$,.4f'))
     .registerValue('DURATION', createDurationFormatter())
-    .registerValue('EURO', createD3NumberFormatter({
-      locale: {
-        "decimal": ",",
-        "thousands": ".",
-        "grouping": [3],
-        "currency": ["€", ""],
-      },
-      formatString: '$,.2f'
-    }))
+    .registerValue(
+      'EURO',
+      createD3NumberFormatter({
+        locale: {
+          decimal: ',',
+          thousands: '.',
+          grouping: [3],
+          currency: ['€', ''],
+        },
+        formatString: '$,.2f',
+      }),
+    )
     .registerValue(
       'DURATION_SUB',
       createDurationFormatter({ formatSubMilliseconds: true }),
